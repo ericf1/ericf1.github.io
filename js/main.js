@@ -9,17 +9,14 @@ const genreSVG = d3.select("#genre-blobs")
   .append("g")
   .attr("transform", "translate(" + (width / 2 + margin.left) + "," + (height / 2 + margin.top + 100) + ")");
 
-//  function tooltip_gen(tooltip_data) {
-//     var self = this;
-//     var text = "<h2 class ="  + self.chooseClass(tooltip_data.winner) + " >" + tooltip_data.state + "</h2>";
-//     text +=  "Electoral Votes: " + tooltip_data.electoralVotes;
-//     text += "<ul>"
-//     tooltip_data.result.forEach(function(row){
-//         text += "<li class = " + self.chooseClass(row.party)+ ">" + row.nominee+":\t\t"+row.votecount+"("+row.percentage+"%)" + "</li>"
-//     });
-//     text += "</ul>";
-//     return text;
-// }
+// define our tooltip div
+const tooltip = d3.select("body").append("div")	
+    .attr("class", "tooltip")
+    .style("position", "absolute")
+    .style("z-index", "10")
+    .style("background-color", "white")
+    .style("opacity", 0)
+
 
 const files = ["data/model-data.json"];
 const promises = [];
@@ -89,7 +86,6 @@ Promise.all(promises).then(function(values){
             "songs": weekdaySongs
         });
     });
-    console.log(weekdayData)
 
     // WEEK SUMMARY
     const weekDiv = document.getElementById("week-summary");
@@ -122,6 +118,7 @@ Promise.all(promises).then(function(values){
                 weekday.songs.forEach(function(d) {
                     let song = d.Song;
                     let genre = d.Genre;
+                    let artist = d.Artist;
                     let count = 0;
                     // if the song is already in the array, increment the count
                     songData.forEach(function(e) {
@@ -135,7 +132,8 @@ Promise.all(promises).then(function(values){
                         songData.push({
                             "song": song,
                             "count": 1,
-                            "genre": genre
+                            "genre": genre,
+                            "artist": artist
                         });
                     }
                 });
@@ -144,8 +142,8 @@ Promise.all(promises).then(function(values){
                     return b.count - a.count;
                 });
                 // get the top 5 songs
-                let topSongs = songData.slice(0, 5);
-                console.log(topSongs)
+                let topSongs = songData.slice(0, 5);    
+                let totalX = 0
 
                 weekSVG
                 .selectAll("rect")
@@ -153,26 +151,34 @@ Promise.all(promises).then(function(values){
                 .enter()
                 .append("rect")
                 .attr("x", function(d, i) {
-                    return i * valueX * d.count;
+                    let temp = totalX
+                    totalX += valueX * d.count
+                    if (i === 0) return 0
+                    return temp
                 })
-                .attr("y", 0)
-                .attr("width", (d, i) => valueX)
+                .attr("y", valueY/2)
+                .attr("width", (d, i) => {
+                    return valueX * d.count
+                })
                 .attr("height", valueY)
                 .attr("fill", function(d) {
                     return scaleGenreColor(d.genre)
                 })
                 .attr("stroke", "black")
                 .attr("stroke-width", 1)
-                .on("mouseover", function(d) {
-                    
-                }
-                )
-                .on("mouseout", function(d) {
-
-                }
-                )
-
-                //d3 tooltip
+                .on("mouseover", function(event, d) {	
+                    tooltip.transition()		
+                        .duration(300)		
+                        .style("opacity", .9);		
+                    tooltip.html(d.song + "<br/>"  + d.artist + "<br/>" + d.count + " plays")	
+                        .style("left", (event.pageX + 10) + "px")		
+                        .style("top", (event.pageY - 29) + "px");	
+                    })		
+                .on("mouseout", function(event, d) {		
+                    tooltip.transition()		
+                        .duration(500)		
+                        .style("opacity", 0);	
+                });
                 
             }
         })
@@ -185,13 +191,28 @@ Promise.all(promises).then(function(values){
     .attr('class', 'nodes')
     .selectAll('circle')
     .data(data)
-    .enter().append('circle')
+    .enter()
+    .append('circle')
     .attr('r', 5)
     .attr('fill', function(d) { return scaleGenreColor(d.Genre); })
     .call(d3.drag()
     .on('start', dragstart)
     .on('drag', drag)
     .on('end', dragend))    
+
+    node.on("mouseover", function(event, d) {	
+        tooltip.transition()		
+            .duration(300)		
+            .style("opacity", .9);		
+        tooltip.html(d.Song + "<br/>"  + d.Artist + "<br/>" + d.Genre)	
+            .style("left", (event.pageX + 10) + "px")		
+            .style("top", (event.pageY - 29) + "px");	
+        })		
+    .on("mouseout", function(event, d) {		
+        tooltip.transition()		
+            .duration(500)		
+            .style("opacity", 0);	
+    })
 
     const simulation = d3.forceSimulation(data)
     .force("charge", d3.forceManyBody().strength(-.08))
