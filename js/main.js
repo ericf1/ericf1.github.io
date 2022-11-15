@@ -260,12 +260,16 @@ Promise.all(promises).then(function(values){
         });
 });
 
+document.getElementById("mp3-page").style.display = "none"
+
 // progress bar
 const progress = document.getElementById('progress');
 
-const nextButton = document.getElementById('next-btn');
-nextButton.addEventListener("click", () => {
+document.getElementById('next-btn').addEventListener("click", () => {
+    console.log("HELP")
     document.getElementById("your-summary-page").style.display = "none"
     document.getElementById("mp3-page").style.display = ""
     progress.style.width = "50%";
 })
+
+
