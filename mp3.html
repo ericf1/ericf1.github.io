@@ -4,14 +4,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- CSS libraries -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Neuton:300,400,400i,700,800"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
-
-    <!-- Custom CSS code -->
     <link rel="stylesheet" href="css/style.css" />
-    <title>Music to Your Ears</title>
     <script defer src="https://d3js.org/d3.v6.min.js"></script>
     <script defer src="js/mp3.js"></script>
+    <title>Music to Your Ears</title>
   </head>
   <body>
     <h1>MUSIC TO YOUR EARS</h1>
@@ -27,25 +28,39 @@
       ></div>
     </div>
     <div class="d-flex justify-content-between">
-      <button id="prev-btn" class="btn btn-primary ml-1">PREVIOUS</button>
-      <button id="next-btn" class="btn btn-primary mr-1">NEXT</button>
+      <button id="prev-btn" class="btn btn-primary">PREVIOUS</button>
+      <button id="next-btn" class="btn btn-primary">NEXT</button>
     </div>
-    <p>Credit:</p>
-    <ul>
-      <li>
-        https://gg-gina.medium.com/how-to-music-visualizer-web-audio-api-aa007f4ea525
-      </li>
-      <li>
-        https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Using_Web_Audio_API
-      </li>
-      <li>https://www.visualcinnamon.com/2020/06/sony-music-data-art/</li>
-      <li>https://www.geeksforgeeks.org/d3-js-arc-function/</li>
-    </ul>
-    <input type="file" id="file-input" accept="audio/*,video/*,image/*" />
-    <h3 id="name"></h3>
+    <div class="mb-3">
+      <input
+        class="form-control"
+        type="file"
+        id="file-input"
+        accept="audio/*,video/*,image/*"
+      />
+    </div>
+
     <audio id="audio" controls></audio>
-    <div id="Canvas">
-      <svg id="svg" width="500" height="500"></svg>
+    <div class="d-flex flex-row">
+      <div>
+        <h3 id="name"></h3>
+        <div id="Canvas">
+          <svg id="svg" width="500" height="500"></svg>
+        </div>
+      </div>
+      <div>
+        Credit:
+        <ul>
+          <li>
+            https://gg-gina.medium.com/how-to-music-visualizer-web-audio-api-aa007f4ea525
+          </li>
+          <li>
+            https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Using_Web_Audio_API
+          </li>
+          <li>https://www.visualcinnamon.com/2020/06/sony-music-data-art/</li>
+          <li>https://www.geeksforgeeks.org/d3-js-arc-function/</li>
+        </ul>
+      </div>
     </div>
   </body>
 </html>
