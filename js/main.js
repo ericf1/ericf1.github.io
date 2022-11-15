@@ -9,17 +9,17 @@ const genreSVG = d3.select("#genre-blobs")
   .append("g")
   .attr("transform", "translate(" + (width / 2 + margin.left) + "," + (height / 2 + margin.top + 100) + ")");
 
- function tooltip_gen(tooltip_data) {
-    var self = this;
-    var text = "<h2 class ="  + self.chooseClass(tooltip_data.winner) + " >" + tooltip_data.state + "</h2>";
-    text +=  "Electoral Votes: " + tooltip_data.electoralVotes;
-    text += "<ul>"
-    tooltip_data.result.forEach(function(row){
-        text += "<li class = " + self.chooseClass(row.party)+ ">" + row.nominee+":\t\t"+row.votecount+"("+row.percentage+"%)" + "</li>"
-    });
-    text += "</ul>";
-    return text;
-}
+//  function tooltip_gen(tooltip_data) {
+//     var self = this;
+//     var text = "<h2 class ="  + self.chooseClass(tooltip_data.winner) + " >" + tooltip_data.state + "</h2>";
+//     text +=  "Electoral Votes: " + tooltip_data.electoralVotes;
+//     text += "<ul>"
+//     tooltip_data.result.forEach(function(row){
+//         text += "<li class = " + self.chooseClass(row.party)+ ">" + row.nominee+":\t\t"+row.votecount+"("+row.percentage+"%)" + "</li>"
+//     });
+//     text += "</ul>";
+//     return text;
+// }
 
 const files = ["data/model-data.json"];
 const promises = [];
@@ -238,3 +238,8 @@ Promise.all(promises).then(function(values){
 
 // progress bar
 const progress = document.getElementById('progress');
+
+const nextButton = document.getElementById('next-btn');
+nextButton.addEventListener("click", () => {
+    window.location.replace("./mp3.html");
+})
