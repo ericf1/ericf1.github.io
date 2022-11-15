@@ -265,5 +265,7 @@ const progress = document.getElementById('progress');
 
 const nextButton = document.getElementById('next-btn');
 nextButton.addEventListener("click", () => {
-    window.location.replace("./mp3.html");
+    document.getElementById("your-summary-page").style.display = "none"
+    document.getElementById("mp3-page").style.display = ""
+    progress.style.width = "50%";
 })
