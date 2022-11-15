@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>M1</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Neuton:300,400,400i,700,800"
+      rel="stylesheet"
+    />
+
+    <!-- CSS libraries -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+
+    <!-- Custom CSS code -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <h1>MUSIC TO YOUR EARS</h1>
+    <div class="d-flex flex-row">
+      <div>
+        <h1>Your week</h1>
+        <div id="week-summary">
+          <div class="d-flex flex-row">
+            <p>Sunday</p>
+            <div name="sunday"></div>
+          </div>
+          <div class="d-flex flex-row">
+            <p>Monday</p>
+            <div name="monday"></div>
+          </div>
+          <div class="d-flex flex-row">
+            <p>Tuesday</p>
+            <div name="tuesday"></div>
+          </div>
+          <div class="d-flex flex-row">
+            <p>Wednesday</p>
+            <div name="wednesday"></div>
+          </div>
+          <div class="d-flex flex-row">
+            <p>Thursday</p>
+            <div name="thursday"></div>
+          </div>
+          <div class="d-flex flex-row">
+            <p>Friday</p>
+            <div name="friday"></div>
+          </div>
+          <div class="d-flex flex-row">
+            <p>Saturday</p>
+            <div name="saturday"></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h1>Genre Blobs</h1>
+        <div id="genre-blobs"></div>
+      </div>
+    </div>
+
+    <h1>Top 5 Songs This Week</h1>
+    <div id="text-size-ranking"></div>
+
+    <div class="progress mb-4">
+      <div
+        id="progress"
+        class="progress-bar"
+        role="progressbar"
+        aria-valuenow="{progress}"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      ></div>
+    </div>
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-primary ml-1">PREVIOUS</button>
+      <button class="btn btn-primary mr-1">NEXT</button>
+    </div>
+
+    <!-- Load JS libraries -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/d3.min.js"></script>
+
+    <!-- Load data, create visualizations -->
+    <script src="js/main.js"></script>
+  </body>
+</html>
