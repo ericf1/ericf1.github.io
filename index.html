@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="description" content="" />
@@ -9,6 +9,7 @@
       href="https://fonts.googleapis.com/css?family=Neuton:300,400,400i,700,800"
       rel="stylesheet"
     />
+    <link rel="icon" type="image/x-icon" href="/pictures/musicnote.png" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
@@ -31,6 +32,7 @@
     <div class="d-flex flex-row">
       <div>
         <h1>Your week</h1>
+        <h6>What do you listen to every day? (Hover for more info)</h6>
         <div id="week-summary">
           <div class="d-flex flex-row">
             <p class="mt-2">Sunday</p>
@@ -64,12 +66,21 @@
       </div>
       <div>
         <h1>Genre Blobs</h1>
+        <h6>How diverse is your music? (Hover for more info)</h6>
         <div id="genre-blobs"></div>
       </div>
     </div>
 
-    <h1>Top 5 Songs This Week</h1>
-    <div id="text-size-ranking"></div>
+    <div class="d-flex flex-row justify-content-center">
+      <div class="d-flex flex-column justify-content-center">
+        <h1 class="center-text">Top 5 Songs This Week</h1>
+        <h6 class="center-text">What do you listen to the most?</h6>
+      </div>
+    </div>
+    <div
+      class="d-flex flex-row justify-content-center"
+      id="text-size-ranking"
+    ></div>
 
     <!-- Load JS libraries -->
     <script src="js/jquery.min.js"></script>

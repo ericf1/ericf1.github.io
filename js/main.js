@@ -1,6 +1,6 @@
-const margin = {top: -250, right: 0, bottom: 0, left: 75},
+const margin = {top: -210, right: 0, bottom: 0, left: 75},
   width = 300 - margin.left - margin.right,
-  height = 250 - margin.top - margin.bottom
+  height = 300 - margin.top - margin.bottom
 
 const genreSVG = d3.select("#genre-blobs")
   .append("svg")
@@ -205,7 +205,7 @@ Promise.all(promises).then(function(values){
             .duration(300)		
             .style("opacity", .9);		
         tooltip.html(d.Song + "<br/>"  + d.Artist + "<br/>" + d.Genre)	
-            .style("left", (event.pageX + 10) + "px")		
+            .style("left", (event.pageX + 25) + "px")		
             .style("top", (event.pageY - 29) + "px");	
         })		
     .on("mouseout", function(event, d) {		
@@ -245,12 +245,15 @@ Promise.all(promises).then(function(values){
     // TEXT SIZE RANKING
 
     // display onto the page
-    d3.select("#text-size-ranking").append("g")
+
+    // reverse topSongs
+    
+    d3.select("#text-size-ranking")
         .selectAll("p")
-        .data(topSongs)
+        .data(topSongs.reverse())
         .enter().append("p")
-        .text(function(d) {
-            return d + " (" + songCount[d] + ")";
+        .html(function(d, i) {
+            return (topSongs.length - i) + ". " + d + " (" + songCount[d] + ")";
         })
         .style("font-size", function(d) {
             return scaleTextSize(songCount[d]) + "px";
